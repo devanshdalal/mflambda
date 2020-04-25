@@ -6,12 +6,10 @@ chardet==3.0.4
 configparser==5.0.0
 diskcache==4.1.0
 docutils==0.15.2
-httplib2==0.17.3
 idna==2.9
 jmespath==0.9.5
 python-dateutil==2.8.1
 requests==2.23.0
-requests-cache==0.5.2
 s3transfer==0.3.3
 six==1.14.0
 soupsieve==2.0
