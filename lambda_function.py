@@ -44,7 +44,7 @@ def LambdaHandler(event, context):
             continue
         print('Fetching the portfolio-holding:', l, i)
         html = FetchPage(l)
-        header, info = ExtractTable(html, attrs={'id':'equityTopSummaryTable'})
+        header, info = ExtractTable(html, attrs={'id':'equityCompleteHoldingTable'})
         # print('headeri', i)
         # print('header', header)
         # print('info', info)
@@ -60,7 +60,7 @@ def LambdaHandler(event, context):
     funds_table = dynamodb.Table('funds')
 
     for k,v in kvpairs.items():
-        # print('k', k, 'v', v)
+        print('k', k, 'v', v)
         response = funds_table.update_item(
             Key={
                 'name': k,

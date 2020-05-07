@@ -4,6 +4,7 @@
 from bs4 import BeautifulSoup
 import csv
 
+TOP_N = 30
 
 def ExtractTable(html, attrs, extract_links=False):
     soup = BeautifulSoup(html, 'html.parser')
@@ -15,6 +16,7 @@ def ExtractTable(html, attrs, extract_links=False):
     header = []
     output_rows = []
     links = []
+    # print('tr', len(table.findAll('tr')))
     for table_row in table.findAll('tr'):
         if header == [] and table_row.findAll('th') != []:
             for column in table_row.findAll('th'):
@@ -30,6 +32,7 @@ def ExtractTable(html, attrs, extract_links=False):
                 output_row.append(column.text.strip())
             output_rows.append(output_row)
 
+    output_rows = output_rows[:min(len(output_rows), TOP_N)]
     # print(header)
     # print(output_rows)
     # print(links)
