@@ -60,7 +60,7 @@ def LambdaHandler(event, context):
     funds_table = dynamodb.Table('funds')
 
     for k,v in kvpairs.items():
-        print('k', k, 'v', v)
+        # print('k', k, 'v', v)
         response = funds_table.update_item(
             Key={
                 'name': k,
