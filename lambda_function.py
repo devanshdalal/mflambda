@@ -27,22 +27,25 @@ def LambdaHandler(event, context):
         mf_links.extend(links)
 
     # print(mf_info[0])
-    # print(mf_links[0])
+    # print('mf_links', mf_links)
 
     print('Tranforming the links to portfolio-holdings')
     for i, x in enumerate(mf_links):
-        s = x.split('/')
-        mf_links[i] = '/'.join(s[:-1] + ['portfolio-holdings', s[-1]])
+        if (len(x) > 0):
+            s = x.split('/')
+            mf_links[i] = '/'.join(s[:-1] + ['portfolio-holdings', s[-1]])
 
     kvpairs = {}
+
+    ind = 0;
 
     print('Fetching the sources\' portfolio-holdings')
     for i, l in zip(mf_info, mf_links):
         # print(i)
         # print(l)
-        if (i[1] == 'Regular'):
+        if (i[1] == 'Regular' or len(l) == 0):
             continue
-        print('Fetching the portfolio-holding:', l, i)
+        print('Fetching the', ind, 'th portfolio-holding:', l, i)
         html = FetchPage(l)
         header, info = ExtractTable(html, attrs={'id':'equityCompleteHoldingTable'})
         # print('headeri', i)
@@ -50,6 +53,7 @@ def LambdaHandler(event, context):
         # print('info', info)
         _, info = FormatTable(header, info)
         kvpairs[i[0]] = info #json.dumps(info)
+        ind+=1
         # break;
     # return
 
