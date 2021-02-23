@@ -10,7 +10,8 @@ def ExtractTable(html, attrs, extract_links=False):
     soup = BeautifulSoup(html, 'html.parser')
     # attrs={'id':'equityTopSummaryTable'}
     table = soup.findAll("table", attrs=attrs)
-    assert len(table) != 0
+    if (len(table) == 0):
+        return None, None
     table = table[0]
 
     header = []
