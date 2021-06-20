@@ -45,7 +45,7 @@ def Execute(ind, mf_info, link, funds_table):
         },
         ReturnValues="UPDATED_NEW"
     )
-    # print('response', response)
+    print('response', response)
 
 def LambdaHandler(event, context):
     print('event:', event, 'context:', context)
@@ -56,6 +56,8 @@ def LambdaHandler(event, context):
 
     print('Fetching the sources')
     mf_info, mf_links = [], []
+    for s in config['SOURCES']:
+        print('config[SOURCES]', s)
     for source in config['SOURCES'][event['resources'][0].split('/')[-1]].split(','):
         html = FetchPage(source)
         _, info, links = ExtractTable(html, attrs={'id':'dataTableId'}, extract_links=True)
