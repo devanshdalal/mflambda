@@ -45,7 +45,7 @@ def Execute(ind, mf_info, link, funds_table):
         },
         ReturnValues="UPDATED_NEW"
     )
-    print('response', response)
+    # print('response', response)
 
 def LambdaHandler(event, context):
     print('event:', event, 'context:', context)
